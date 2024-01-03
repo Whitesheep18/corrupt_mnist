@@ -30,8 +30,15 @@ class CorruptMNIST(Dataset):
         return image, label
 
 def mnist(batch_size=64):
-    """Return train and test dataloaders for MNIST."""
-    # exchange with the corrupted mnist dataset
+    """
+    Loads the CorruptMNIST dataset and returns DataLoaders for the training and test sets.
+
+    Args:
+        batch_size (int, optional): The batch size to use for the DataLoader. Defaults to 64.
+
+    Returns:
+        tuple: A tuple containing the training and test DataLoaders.
+    """
     trainset = CorruptMNIST(train=True)
     testset = CorruptMNIST(train=False)
 
