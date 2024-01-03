@@ -43,7 +43,8 @@ The directory structure of the project looks like this:
 │   │
 │   ├── data             <- Scripts to download or generate data
 │   │   ├── __init__.py
-│   │   └── make_dataset.py
+│   │   ├── make_dataset.py
+|   |   └── dataloader.py
 │   │
 │   ├── models           <- model implementations, training script and prediction script
 │   │   ├── __init__.py
@@ -61,3 +62,4 @@ The directory structure of the project looks like this:
 Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
 a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
 started with Machine Learning Operations (MLOps).
+
