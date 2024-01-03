@@ -40,6 +40,9 @@ clean:
 data: requirements
 	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/data/make_dataset.py
 
+train: requirements
+	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_model.py train
+
 #################################################################################
 # Documentation RULES                                                           #
 #################################################################################

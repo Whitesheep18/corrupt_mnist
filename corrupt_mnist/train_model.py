@@ -2,7 +2,9 @@ import click
 import torch
 from corrupt_mnist.models.model import MyNeuralNet
 from data.dataloader import mnist
+from visualizations.visualize import save_training_loss
 from tqdm import tqdm
+
 
 @click.group()
 def cli():
@@ -22,20 +24,27 @@ def train(lr, epochs):
     # TODO: Implement training loop here
     model = MyNeuralNet()
     train_loader, _ = mnist()
-
+    training_loss = []
     criterion = torch.nn.NLLLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     for epoch in range(epochs):
         pbar = tqdm(train_loader, total=len(train_loader))
+        epoch_loss = []
         for images, labels in pbar:
             optimizer.zero_grad()
             output = model(images)
-            loss = criterion(output, labels)
-            loss.backward()
+            batch_loss = criterion(output, labels)
+            epoch_loss.append(batch_loss.item())
+            batch_loss.backward()
             optimizer.step()
-            pbar.set_description(f"Epoch {epoch+1}, Loss: {loss.item()}")
+            pbar.set_description(f"Epoch {epoch+1}, Loss: {batch_loss.item()}")
         else:
+            training_loss.append(sum(epoch_loss) / len(epoch_loss)) #avg
             torch.save(model, "models/model.pth")
+
+        # save visualization of training
+        save_training_loss(training_loss)
+        
 
 @click.command()
 @click.argument("model_checkpoint")
