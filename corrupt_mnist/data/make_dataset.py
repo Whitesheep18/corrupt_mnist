@@ -1,8 +1,10 @@
+import os 
+
 if __name__ == '__main__':
     # Get the data and process it
 
     import torch
-    chunks = 6
+    chunks = len([x for x in os.listdir('data/raw/') if 'train_images' in x])
     imgs = []
     for i in range(chunks):
         img_set = torch.load(f'data/raw/train_images_{i}.pt')

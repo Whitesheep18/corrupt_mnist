@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import Dataset, DataLoader
-
+import os
 
 class CorruptMNIST(Dataset):
     def __init__(self, train = True):
@@ -8,7 +8,8 @@ class CorruptMNIST(Dataset):
         if self.train:
             imgs = []
             labels = []
-            for i in range(6):
+            chunks = len([x for x in os.listdir('data/raw/') if 'train_images' in x])
+            for i in range(chunks):
                 img_set = torch.load(f'data/processed/train_images_{i}.pt')
                 label_set = torch.load(f'data/processed/train_target_{i}.pt')
                 imgs.append(img_set)
