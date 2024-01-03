@@ -3,13 +3,14 @@ import torch.nn as nn
 
 
 class MyNeuralNet(torch.nn.Module):
-    """ Basic neural network class. 
-    
+    """Basic neural network class.
+
     Args:
         in_features: number of input features
         out_features: number of output features
-    
+
     """
+
     def __init__(self, in_features: int = 28, out_features: int = 28) -> None:
         super().__init__()
         self.fc1 = nn.Linear(784, 256)
@@ -19,10 +20,10 @@ class MyNeuralNet(torch.nn.Module):
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=0.2)
         self.log_softmax = nn.LogSoftmax(dim=1)
-    
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward pass of the model.
-        
+
         Args:
             x: input tensor expected to be of shape [N,in_features]
 
@@ -30,8 +31,8 @@ class MyNeuralNet(torch.nn.Module):
             Output tensor with shape [N,out_features]
 
         """
-        # make sure input tensor is flattened     
-        x = x.view(x.shape[0], -1)   
+        # make sure input tensor is flattened
+        x = x.view(x.shape[0], -1)
         x = self.relu(self.fc1(x))
         x = self.dropout(x)
         x = self.relu(self.fc2(x))

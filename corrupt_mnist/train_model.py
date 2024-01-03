@@ -18,9 +18,9 @@ def cli():
 def train(lr, epochs):
     """Train a model on MNIST."""
     print("Training day and night")
-    print('Learning rate', lr)
-    print('Epochs', epochs)
-    
+    print("Learning rate", lr)
+    print("Epochs", epochs)
+
     # TODO: Implement training loop here
     model = MyNeuralNet()
     train_loader, _ = mnist()
@@ -39,12 +39,12 @@ def train(lr, epochs):
             optimizer.step()
             pbar.set_description(f"Epoch {epoch+1}, Loss: {batch_loss.item()}")
         else:
-            training_loss.append(sum(epoch_loss) / len(epoch_loss)) #avg
+            training_loss.append(sum(epoch_loss) / len(epoch_loss))  # avg
             torch.save(model, "models/model.pth")
 
         # save visualization of training
         save_training_loss(training_loss)
-        
+
 
 @click.command()
 @click.argument("model_checkpoint")
@@ -67,8 +67,6 @@ def evaluate(model_checkpoint):
     else:
         acc = running_sum / len(test_loader.dataset)
         print(f"Accuracy: {acc*100:.2f}%")
-    
-    
 
 
 cli.add_command(train)
