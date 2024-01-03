@@ -63,3 +63,14 @@ Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
 a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
 started with Machine Learning Operations (MLOps).
 
+To create environment run:
+$ make create_environment
+
+To preprocess data run:
+$ make data
+
+To train run:
+make train
+
+To visualize the last features of a model run:
+python corrupt_mnist/visualizations/visualize.py
