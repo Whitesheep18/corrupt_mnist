@@ -20,6 +20,8 @@ def download_data():
     
 if __name__ == "__main__":
     # Get the data and process it
+    print('here I am')
+    print(os.listdir('.'))
 
     import torch
 
