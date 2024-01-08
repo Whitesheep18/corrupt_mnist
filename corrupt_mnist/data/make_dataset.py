@@ -4,8 +4,8 @@ import os
 def download_data():
     base_path = "https://github.com/SkafteNicki/dtu_mlops/blob/main/data/corruptmnist/"
 
-    os.system(f"mkdir data/raw")
-    os.system(f"mkdir data/processed")
+    os.system(f"mkdir -p data/raw")
+    os.system(f"mkdir -p data/processed")
 
     os.system(f"wget {base_path}/test_images.pt")
     os.system("mv test_images.pt data/raw/test_images.pt")
