@@ -14,9 +14,9 @@ def download_data():
 
     for i in range(6):
         os.system(f"wget {base_path}/train_images_{i}.pt")
-        os.system("mv train_images_{i}.pt data/raw/train_images_{i}.pt")
+        os.system(f"mv train_images_{i}.pt data/raw/train_images_{i}.pt")
         os.system(f"wget {base_path}/train_target_{i}.pt")
-        os.system("mv train_target_{i}.pt data/raw/train_target_{i}.pt")
+        os.system(f"mv train_target_{i}.pt data/raw/train_target_{i}.pt")
     
 if __name__ == "__main__":
     # Get the data and process it
