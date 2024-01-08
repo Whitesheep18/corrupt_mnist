@@ -1,8 +1,9 @@
 import torch
 import torch.nn as nn
+import pytorch_lightning as pl
 
 
-class MyNeuralNet(torch.nn.Module):
+class MyNeuralNet(pl.LightningModule):
     """Basic neural network class.
 
     Args:
@@ -41,3 +42,14 @@ class MyNeuralNet(torch.nn.Module):
         x = self.dropout(x)
         x = self.log_softmax(self.fc4(x))
         return x
+    
+    def training_step(self, batch, batch_idx):
+        x, y = batch
+        logits = self.forward(x)
+        loss = nn.functional.nll_loss(logits, y)
+        self.log('train_loss', loss)
+        return loss
+    
+    def configure_optimizers(self):
+        optimizer = torch.optim.Adam(self.parameters(), lr=0.001)
+        return optimizer

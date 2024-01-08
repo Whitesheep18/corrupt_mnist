@@ -1,10 +1,14 @@
 import click
 import torch
-from corrupt_mnist.models.model import MyNeuralNet
-from data.dataloader import mnist
-from visualizations.visualize import save_training_loss
 from tqdm import tqdm
+from pytorch_lightning import Trainer, LightningModule
+from pytorch_lightning.callbacks import ModelCheckpoint
+from corrupt_mnist.models.model import MyNeuralNet
+from corrupt_mnist.data.dataloader import mnist
+from corrupt_mnist.visualizations.visualize import save_training_loss
 
+#import pdb
+#pdb.set_trace()
 
 @click.group()
 def cli():
@@ -21,29 +25,17 @@ def train(lr, epochs):
     print("Learning rate", lr)
     print("Epochs", epochs)
 
-    # TODO: Implement training loop here
     model = MyNeuralNet()
-    train_loader, _ = mnist()
-    training_loss = []
-    criterion = torch.nn.NLLLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    for epoch in range(epochs):
-        pbar = tqdm(train_loader, total=len(train_loader))
-        epoch_loss = []
-        for images, labels in pbar:
-            optimizer.zero_grad()
-            output = model(images)
-            batch_loss = criterion(output, labels)
-            epoch_loss.append(batch_loss.item())
-            batch_loss.backward()
-            optimizer.step()
-            pbar.set_description(f"Epoch {epoch+1}, Loss: {batch_loss.item()}")
-        else:
-            training_loss.append(sum(epoch_loss) / len(epoch_loss))  # avg
-            torch.save(model, "models/model.pth")
+    print(type(model))
+    print(dir(model))
+    print(isinstance(model, LightningModule))
+    train_loader, test_loader = mnist()
+    checkpoint_callback = ModelCheckpoint(dirpath="./models", monitor="val_loss", mode="min")
+    trainer = Trainer(callbacks=[checkpoint_callback])
+    trainer.fit(model, train_loader)
+    trainer.test(model, test_loader)
 
-        # save visualization of training
-        save_training_loss(training_loss)
+    # TODO: log loss with wandb
 
 
 @click.command()
