@@ -25,10 +25,10 @@ if __name__ == "__main__":
 
     import torch
 
-    if os.path.exists("data/raw/train_images_0.pt"):
-        print("Data already downloaded")
-    else:   
-        download_data()
+    #if os.path.exists("data/raw/train_images_0.pt"):
+    #    print("Data already downloaded")
+    #else:   
+    #    download_data()
 
     chunks = len([x for x in os.listdir("data/raw/") if "train_images" in x])
     imgs = []

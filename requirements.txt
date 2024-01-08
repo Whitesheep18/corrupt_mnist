@@ -5,3 +5,5 @@ tqdm
 scikit-learn
 matplotlib
 ruff
+pip install dvc
+pip install "dvc[gdrive]"

@@ -23,9 +23,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r requirements_tests.txt
-    - name: Make dataset
+    - name: Get dataset
       run: |
-        python corrupt_mnist/data/make_dataset.py
+        dvc pull
     - name: Test with pytest
       run: |
         pip install pytest
