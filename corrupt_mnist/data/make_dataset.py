@@ -1,9 +1,24 @@
 import os
 
+
+def download_data():
+    base_path = "https://github.com/SkafteNicki/dtu_mlops/blob/main/data/corruptmnist/"
+
+    os.system(f"wget {base_path}/test_images.pt")
+    os.system(f"wget {base_path}/test_target.pt")
+    for i in range(6):
+        os.system(f"wget {base_path}/train_images_{i}.pt")
+        os.system(f"wget {base_path}/train_target_{i}.pt")
+    
 if __name__ == "__main__":
     # Get the data and process it
 
     import torch
+
+    if os.path.exists("data/raw/train_images_0.pt"):
+        print("Data already downloaded")
+    else:   
+        download_data()
 
     chunks = len([x for x in os.listdir("data/raw/") if "train_images" in x])
     imgs = []
