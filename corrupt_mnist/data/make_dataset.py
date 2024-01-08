@@ -4,11 +4,19 @@ import os
 def download_data():
     base_path = "https://github.com/SkafteNicki/dtu_mlops/blob/main/data/corruptmnist/"
 
+    os.system(f"mkdir data/raw")
+    os.system(f"mkdir data/processed")
+
     os.system(f"wget {base_path}/test_images.pt")
+    os.system("mv test_images.pt data/raw/test_images.pt")
     os.system(f"wget {base_path}/test_target.pt")
+    os.system("mv test_target.pt data/raw/test_target.pt")
+
     for i in range(6):
         os.system(f"wget {base_path}/train_images_{i}.pt")
+        os.system("mv train_images_{i}.pt data/raw/train_images_{i}.pt")
         os.system(f"wget {base_path}/train_target_{i}.pt")
+        os.system("mv train_target_{i}.pt data/raw/train_target_{i}.pt")
     
 if __name__ == "__main__":
     # Get the data and process it
