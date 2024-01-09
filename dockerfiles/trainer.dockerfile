@@ -12,7 +12,7 @@ COPY pyproject.toml pyproject.toml
 COPY corrupt_mnist/ corrupt_mnist/
 COPY data/ data/
 COPY reports/ reports/
-COPY models/ models/
+#COPY models/ models/
 
 # set working directory 
 #(As an alternative you can use RUN make requirements after copying Makefile)
