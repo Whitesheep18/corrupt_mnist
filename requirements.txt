@@ -7,3 +7,4 @@ matplotlib
 ruff
 dvc
 dvc[gdrive]
+dvc_gs
