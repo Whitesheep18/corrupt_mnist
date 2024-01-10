@@ -1,6 +1,18 @@
 outs:
-- md5: 8798c930f133c741feca67b3cbef2e07.dir
-  size: 975592
-  nfiles: 2
-  hash: md5
+- hash: md5
   path: models
+  files:
+  - relpath: .gitkeep
+    md5: d41d8cd98f00b204e9800998ecf8427e
+    size: 0
+    cloud:
+      remote_storage:
+        etag: 0887bfccc8b6d283031001
+        version_id: '1704876146106247'
+  - relpath: model.pth
+    md5: 9603f3f5ab9438fdc140e72056aec9a1
+    size: 975592
+    cloud:
+      remote_storage:
+        etag: 08dcacbec8b6d283031001
+        version_id: '1704876145874524'
